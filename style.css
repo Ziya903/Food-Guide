@@ -30,4 +30,15 @@ input:focus{
     border: 2px solid goldenrod;
     outline: none;
 }
+#foodResult{
+    width:350px;
+    border: 2px solid black;
+    border-radius: 25px;
+    margin-top: 30px;
+}
+.foodResult img{
+       width: 100%;
+       height: auto;
+       border-radius: 4px;
+}
 
