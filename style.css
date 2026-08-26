@@ -30,15 +30,22 @@ input:focus{
     border: 2px solid goldenrod;
     outline: none;
 }
-#foodResult{
-    width:350px;
-    border: 2px solid black;
-    border-radius: 25px;
-    margin-top: 30px;
+div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
-.foodResult img{
+#foodResult{
+    width:400px;
+    border: 2px solid black; 
+    border-radius: 25px; 
+    margin: 50px auto 0;
+    padding: 25px;
+}
+.foodImg img{
        width: 100%;
        height: auto;
        border-radius: 4px;
+       object-fit: contain;
 }
 
