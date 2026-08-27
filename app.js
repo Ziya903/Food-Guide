@@ -3,6 +3,7 @@ let btn = document.querySelector("button");
 let foodResult = document.querySelector("#foodResult");
 foodResult.style.display = "none";
 let historyValue = document.querySelector("#historyValue");
+let clearHistoryContainer = document.querySelector(".clearHistoryContainer");
 let historyArr = [];
 btn.addEventListener("click",()=>{
     if(input.value != ""){
@@ -11,7 +12,7 @@ btn.addEventListener("click",()=>{
     }else{
         alert("Please enter your barcode");
     }
-})
+}) 
 async function getValue() {
     try{
         let result = await axios.get(`https://world.openfoodfacts.org/api/v0/product/${input.value}.json`);
@@ -25,8 +26,11 @@ async function getValue() {
                         <p>Nutri : ${product.nutriscore_score}
                         </p>`
         foodResult.style.display="block";
-        historyArr.push(input.value);
+        if(!historyArr.includes(input.value)){
+                  historyArr.push(input.value);
+             }
         localStorage.setItem("history",JSON.stringify(historyArr));
+        showHistory();
         input.value = "";
         }else{
             alert("Product not found");
@@ -47,7 +51,19 @@ function showHistory(){
       }
            historyValue.innerHTML ="";
           for(let i=0; i<historyArr.length;i++){
-              historyValue.innerHTML += historyArr[i] + "<br>";
+              let historyButton = document.createElement("button");
+              historyButton.innerText = historyArr[i];
+              historyButton.addEventListener("click" , () =>{
+                  input.value = historyArr[i];
+              });
+              historyValue.appendChild(historyButton);
         }    
     }
 showHistory();
+let clearHistory = document.createElement("button");
+clearHistory.innerText = "Clear History";
+clearHistory.addEventListener("click",()=>{
+    localStorage.removeItem("history");
+    historyValue.innerHTML = "";
+})
+clearHistoryContainer.appendChild(clearHistory);

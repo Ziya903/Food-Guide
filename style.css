@@ -50,9 +50,13 @@ input:focus{
 }
 .history{
     width: 300px;
-    height: auto;
+    max-height: 300px;
     border: 2px solid black;
     border-radius: 25px;
     margin-top: 50px;
+}
+#historyValue button{
+    display: block;
+    margin-top: 5px;
 }
 
