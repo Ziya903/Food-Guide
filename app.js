@@ -2,6 +2,8 @@ let input = document.querySelector("input");
 let btn = document.querySelector("button");
 let foodResult = document.querySelector("#foodResult");
 foodResult.style.display = "none";
+let historyValue = document.querySelector("#historyValue");
+let historyArr = [];
 btn.addEventListener("click",()=>{
     if(input.value != ""){
          console.log(input.value);
@@ -23,9 +25,8 @@ async function getValue() {
                         <p>Nutri : ${product.nutriscore_score}
                         </p>`
         foodResult.style.display="block";
-        localStorage.setItem("history",input.value);
-        let history = localStorage.getItem("history");
-        history.innerHTML = "history";
+        historyArr.push(input.value);
+        localStorage.setItem("history",JSON.stringify(historyArr));
         input.value = "";
         }else{
             alert("Product not found");
@@ -37,3 +38,16 @@ async function getValue() {
         console.log("Error fetching data",error);
     }
 }
+
+function showHistory(){
+      let savedHistory = localStorage.getItem("history");
+      if(savedHistory){
+          historyArr = JSON.parse(savedHistory);
+
+      }
+           historyValue.innerHTML ="";
+          for(let i=0; i<historyArr.length;i++){
+              historyValue.innerHTML += historyArr[i] + "<br>";
+        }    
+    }
+showHistory();
